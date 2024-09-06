@@ -1,0 +1,30 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model IdentityUserRole<string>
+
+@{
+    ViewData["Title"] = "AddRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add Role</h1>
+
+<h3>Are you sure you want to add the role to user?</h3>
+<div>
+    <h4>Role</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-10">
+            Role Name
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.RoleName
+        </dd>
+    </dl>
+
+    <form asp-action="AddRole">
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="RoleId" />
+        <input type="submit" value="AddRole" class="btn btn-primary" /> |
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

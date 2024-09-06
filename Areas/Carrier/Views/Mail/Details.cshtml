@@ -1,0 +1,118 @@
+﻿@using PostalManagementMVC.Utilities;
+
+@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var statuses = ViewBag.StatusesCatalog as List<PostalManagementMVC.Entities.StatusCatalog>;
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(BarCodeGenerator.Generate(Model.Code?.ToString())))" />
+            <br />
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+    </dl>
+    <dl class="row">
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.StartLocationName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.StartLocationName)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.EndLocationName)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.EndLocationName)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeInserted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeInserted)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeDelivered)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeDelivered)
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Hight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Hight)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Weight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Weight)
+            </dd>
+        </div>
+    </dl>
+    <div class="row">
+        @if (ViewBag.PackageItems != null && ViewBag.PackageItems.Count > 0)
+        {
+            <hr />
+            <h5>Package Items</h5>
+            <partial name="_PackageItemsReadOnly" model="@ViewBag.PackageItems" />
+            <hr />
+        }
+    </div>
+    <partial name="_StatusHistory" model="@ViewBag.MailStatuses" />
+</div>
+<br />
+<div>
+    <form method="post">
+        <input asp-for="Id" type="hidden" />
+        @if (Model.CurrentStatus.StatusCatalogId == statuses.Find(s => String.Equals(s.Name, Globals.REGISTERED)).Id)
+        {
+            <a asp-action="ManageItems" asp-route-id="@Model?.Id" class="btn btn-primary">Manage Items</a>
+            <span> | </span>
+        }
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
+        @{
+            if (ViewBag.PackageItems != null && ViewBag.PackageItems.Count > 0 && statuses.Find(s => String.Equals(s.Name, Globals.REGISTERED)).Id == Model.CurrentStatus.StatusCatalogId)
+            {
+                <button asp-action="SetInTransit" class="btn btn-primary">Set In-Transit</button>
+                <span> | </span>
+            }
+            if (statuses.Find(s => String.Equals(s.Name, Globals.IN_TRANSIT)).Id == Model.CurrentStatus.StatusCatalogId)
+            {
+                <button asp-action="SetDelivered" class="btn btn-primary">Set Delivered</button>
+                <span> | </span>
+            }
+        }
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

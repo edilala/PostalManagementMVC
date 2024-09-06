@@ -1,0 +1,92 @@
+﻿@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Returned";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Returned</h1>
+
+<h3>Do you want to return this item?</h3>
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <dl class="row">
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Code)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Code)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.RecipientAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RecipientAddress)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.SenderAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SenderAddress)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeInserted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeInserted)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeDelivered)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeDelivered)
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Hight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Hight)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Weight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Weight)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.ReceiverContactNr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReceiverContactNr)
+            </dd>
+        </div>
+    </dl>
+    
+    <form asp-action="Returned">
+        <input type="hidden" id="MailId" name="MailId" value="@Model.Id" />
+        <div class="form-outline">
+            <label class="form-label" for="Note">Add note why this item is returned</label>
+            <textarea class="form-control" id="Note" name="Note" rows="4"></textarea>
+        </div>
+        <br />
+        <br />
+        <input type="submit" value="Returned" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

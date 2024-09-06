@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using PostalManagementMVC.Data;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (User != null && SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin"))
+{
+    <li class="nav-item dropdown show">
+        <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Admin</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Country" asp-action="Index">Manage Countries</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="PostOffice" asp-action="Index">Manage Post Offices</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="User" asp-action="Index">Manage Users</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="MailCategory" asp-action="Index">Manage Mail Categories</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="LocationConnection" asp-action="Index">Manage Location Connections</a>
+            <span class="dropdown-divider"></span>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Mail" asp-action="Index">Late Mail</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Mail" asp-action="ReportsByCity">Mail Report By City</a>
+            <a class="dropdown-item" asp-area="Admin" asp-controller="Mail" asp-action="ReportsByLocation">Mail Report By Location</a>
+        </div>
+    </li>
+}

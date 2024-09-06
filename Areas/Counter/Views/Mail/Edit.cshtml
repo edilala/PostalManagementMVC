@@ -1,0 +1,68 @@
+﻿@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+
+@*No need to edit mail record directly. All functionality should be managed from dettails page*@
+<h4>Mail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="MailBundleId" />
+            <div class="form-group">
+                <label asp-for="Code" class="control-label"></label>
+                <input asp-for="Code" class="form-control" readonly />
+                <span asp-validation-for="Code" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RecipientAddress" class="control-label"></label>
+                <input asp-for="RecipientAddress" class="form-control" />
+                <span asp-validation-for="RecipientAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SenderAddress" class="control-label"></label>
+                <input asp-for="SenderAddress" class="form-control" />
+                <span asp-validation-for="SenderAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StartLocationId" class="control-label"></label>
+                <input asp-for="StartLocationId" class="form-control" readonly />
+                <span asp-validation-for="StartLocationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EndLocationId" class="control-label"></label>
+                <select asp-for="EndLocationId" class="form-control" asp-items="ViewBag.EndLocationId"></select>
+                <span asp-validation-for="EndLocationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PostalCodeId" class="control-label"></label>
+                <select asp-for="PostalCodeId" class="form-control" asp-items="ViewBag.PostalCodesList"></select>
+                <span asp-validation-for="PostalCodeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DaysToDelivery" class="control-label"></label>
+                <select asp-for="DaysToDelivery" class="form-control" asp-items="ViewBag.PostalCodesList"></select>
+                <span asp-validation-for="DaysToDelivery" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

@@ -1,0 +1,15 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using PostalManagementMVC.Data;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (User != null && SignInManager.IsSignedIn(User) && (await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Distributor") || await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin")))
+{
+    <li class="nav-item dropdown show">
+        <a class="dropdown-toggle nav-link" href="#" data-bs-toggle="dropdown">Distributor</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" asp-area="Distributor" asp-controller="Mail" asp-action="Index">Manage Mails</a>
+            <a class="dropdown-item" asp-area="Distributor" asp-controller="Mail" asp-action="Reports">View Reports</a>
+        </div>
+    </li>
+}

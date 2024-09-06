@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PostalManagementMVC.Entities.Mail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipientAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeInserted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReceiverContactNr)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipientAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeInserted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReceiverContactNr)
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    @{
+                        if (item.CurrentStatus.StatusCatalogId == ViewBag.DeliveredToCenterStatusId)
+                        {
+                            <span> | </span>
+
+                            <a asp-action="OutForDelivery" asp-route-id="@item.Id" class="btn btn-primary">Out for delivery</a>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

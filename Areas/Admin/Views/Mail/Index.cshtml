@@ -1,0 +1,62 @@
+﻿@model IEnumerable<PostalManagementMVC.Entities.Mail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* shfaqim listen e postave ne nje tabele dhe kemi butonat perkates per CRUD *@
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RecipientAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenderAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TimeInserted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DaysToDelivery)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OverdueDays)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipientAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenderAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimeInserted)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DaysToDelivery)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OverdueDays)
+                </td>
+                <td>
+                    <a asp-area="Counter" asp-controller="Mail" asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

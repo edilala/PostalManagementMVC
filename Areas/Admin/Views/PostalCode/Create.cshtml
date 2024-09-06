@@ -1,0 +1,49 @@
+﻿@model PostalManagementMVC.Entities.PostalCode
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* forma ne razor view per te krijuar nje kod postar te ri *@
+<h1>Create</h1>
+
+<h4>PostalCode</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            @if (Model == null || Model.LocationId == 0)
+            {
+                <div class="form-group">
+                    <label asp-for="LocationId" class="control-label"></label>
+                    <select asp-for="LocationId" class="form-control" asp-items="ViewBag.Locations"></select>
+                </div>
+            }
+            else
+            {
+                <input asp-for="LocationId" type="hidden" />
+            }
+            <div class="form-group">
+                <label asp-for="ZipCode" class="control-label"></label>
+                <input asp-for="ZipCode" class="form-control" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @if (Model == null || Model.LocationId == 0)
+                {
+                    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-route-fromLocationId="@Model?.LocationId" class="btn btn-primary">Back to List</a>
+                }
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

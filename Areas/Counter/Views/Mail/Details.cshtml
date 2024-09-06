@@ -1,0 +1,163 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using PostalManagementMVC.Data;
+@using PostalManagementMVC.Utilities;
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@model PostalManagementMVC.Entities.Mail
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    bool isAdmin = User != null && SignInManager.IsSignedIn(User) && await UserManager.IsInRoleAsync(UserManager.GetUserAsync(User).Result, "Admin");
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <div class="row">
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@String.Format("data:image/png;base64,{0}", Convert.ToBase64String(BarCodeGenerator.Generate(Model.Code?.ToString())))" />
+            <br />
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+    </div>
+    <dl class="row">
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.StartLocationId)
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.StartLocationName
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.EndLocationId)
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.EndLocationName
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.PostalCodeId)
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.PostalCode
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.CategoryName
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.DaysToDelivery)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.DaysToDelivery)
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.RecipientAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.RecipientAddress)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.ReceiverContactNr)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ReceiverContactNr)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.SenderAddress)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.SenderAddress)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeInserted)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeInserted)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.TimeDelivered)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.TimeDelivered)
+            </dd>
+            <dt class="col-sm-10">
+                Mail Category Fee
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.TransportFee
+            </dd>
+        </div>
+        <div class="col-md-4">
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Height)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Height)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Width)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Width)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Hight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Hight)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.Weight)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Weight)
+            </dd>
+            <dt class="col-sm-10">
+                @Html.DisplayNameFor(model => model.ChoosenPath)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ChoosenPath)
+            </dd>
+            <dt class="col-sm-10">
+                Total Cost
+            </dt>
+            <dd class="col-sm-10">
+                @ViewBag.TotalCost
+            </dd>
+
+        </div>
+        <partial name="_StatusHistory" model="@ViewBag.StatusesList" />
+    </dl>
+</div>
+<div class="not-printable">
+    <button type="button" id="print-receipt-btn" class="btn btn-primary">Print the receipt</button>
+    @{
+        if (String.Equals(ViewBag?.CurrentStatus?.StatusName, "REGISTERED", StringComparison.OrdinalIgnoreCase))
+        {
+            <a asp-action="Cancel" asp-route-id="@Model?.Id" class="btn btn-danger">Cancel</a>
+        }
+        if (String.Equals(ViewBag?.CurrentStatus?.StatusName, "CANCELLED", StringComparison.OrdinalIgnoreCase) || isAdmin)
+        {
+            <a asp-action="Delete" asp-route-id="@Model?.Id" class="btn btn-danger">Delete</a>
+        }
+        if (isAdmin)
+        {
+            <a asp-area="Admin" asp-controller="Mail" asp-action="Index" class="btn btn-primary">Bact to Late Mails</a>
+        }
+        <span> | </span>
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    }
+</div>

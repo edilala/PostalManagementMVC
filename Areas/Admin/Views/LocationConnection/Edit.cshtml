@@ -1,0 +1,52 @@
+﻿@model PostalManagementMVC.Entities.LocationConnection
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* forma ne razor view per te edituar te dhenat e nje lidhje vendodhjesh *@
+<h1>Edit</h1>
+
+<h4>LocationConnection</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="FromLocationId" />
+            <input type="hidden" asp-for="ToLocationId" />
+            <div class="form-group">
+                <label asp-for="FromLocationName" class="control-label"></label>
+                <input asp-for="FromLocationName" class="form-control" asp-items="ViewBag.FromLocationId" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="ToLocationName" class="control-label"></label>
+                <input asp-for="ToLocationName" class="form-control" asp-items="ViewBag.ToLocationId" readonly />
+            </div>
+            <div class="form-group">
+                <label asp-for="OnDay" class="control-label"></label>
+                <select asp-for="OnDay" class="form-control" asp-items="ViewBag.WeekDays"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TransportDays" class="control-label"></label>
+                <input asp-for="TransportDays" class="form-control" min="0" max="1000" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Cost" class="control-label"></label>
+                <input asp-for="Cost" class="form-control" min="0" max="9999" />
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

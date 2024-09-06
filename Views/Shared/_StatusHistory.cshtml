@@ -1,0 +1,24 @@
+﻿@model PostalManagementMVC.Models.StatusHistoryModel
+
+@if (Model != null && Model.Statuses.Count > 0)
+{
+    <div class="status-history-container d-flex w-100">
+        @foreach (var status in Model.Statuses)
+        {
+            <div class="status-card">
+                <div class="status-header">
+                    <label>@status.StatusName</label>
+                </div>
+                <hr />
+                <div class="status-body">
+                    <label>Carrier: <span>@status.OwnerName</span></label>
+                    <label>Time Assigned: <span>@status.TimeAssigned</span></label>
+                    @if (!String.IsNullOrWhiteSpace(status.Note))
+                    {
+                        <label>Note: <span>@status.Note</span></label>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+}

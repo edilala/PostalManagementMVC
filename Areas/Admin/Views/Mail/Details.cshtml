@@ -1,0 +1,72 @@
+﻿@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* forma ne razor view per te shfaqur te dhenat e nje poste *@
+<h1>Details</h1>
+
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.RecipientAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecipientAddress)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.SenderAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SenderAddress)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.TimeInserted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeInserted)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.DaysToDelivery)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DaysToDelivery)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.OverdueDays)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OverdueDays)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.TimeDelivered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeDelivered)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.ReceiverContactNr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReceiverContactNr)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.ChoosenPath)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ChoosenPath)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

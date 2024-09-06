@@ -1,0 +1,63 @@
+﻿@using PostalManagementMVC.Areas.Carrier.Models;
+@model PackageModel
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundle.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundle.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundle.RecipientAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundle.EndLocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundle.CurrentStatus.StatusName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model?.PackageItems)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RecipientAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndLocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentStatus.StatusName)
+                </td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" id="MailBundleId" name="MailBundleId" value="@Model.Bundle.Id" />
+                        <input type="hidden" id="Id" name="Id" value="@item.Id" />
+                        @{
+                            if (item.MailBundleId != Model.Bundle.Id)
+                            {
+                                <button asp-action="AddItem" class="btn btn-primary">Add</button>
+                            }
+                            else
+                            {
+                                <button asp-action="RemoveItem" class="btn btn-danger">Remove</button>
+                            }
+                        }
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

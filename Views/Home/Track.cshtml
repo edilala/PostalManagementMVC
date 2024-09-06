@@ -1,0 +1,34 @@
+﻿@model TrackPageModel;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Enter the code to track your mail in the following field:</p>
+    <form method="get" asp-action="Track">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label class="control-label">Code</label>
+            <input asp-for="Code" placeholder="Tracking Code" />
+            <input type="submit" value="Track" class="btn btn-primary" />
+        </div>
+        <br />
+        <br />
+        @{
+            var history = ViewBag.MailStatuses as StatusHistoryModel;
+            if (history != null && history.Statuses != null && history.Statuses.Count > 0)
+            {
+                <h4>Tracking history</h4>
+                <partial name="_StatusHistory" model="history" />
+            }
+        }
+        <div class="form-group">
+            <label class="control-label">Subscribe</label>
+            <input asp-for="Email" placeholder="Enter your mail address" />
+            <button class="btn btn-primary" asp-controller="Home" asp-action="Subscribe">Subscribe</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,49 @@
+﻿@model PostalManagementMVC.Entities.LocationConnection
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* forma ne razor view per te shfaqur te dhenat e nje lidhje vendodhjesh *@
+<h1>Details</h1>
+
+<div>
+    <h4>LocationConnection</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.FromLocationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FromLocationName)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.ToLocationName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ToLocationName)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.OnDay)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OnDay)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.TransportDays)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TransportDays)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Cost)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

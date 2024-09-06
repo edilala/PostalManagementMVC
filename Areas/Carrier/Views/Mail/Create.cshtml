@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@using PostalManagementMVC.Data;
+@model PostalManagementMVC.Entities.Mail
+
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var userId = UserManager.GetUserId(User);
+    var user = await UserManager.FindByIdAsync(userId);
+}
+
+<h1>Create</h1>
+
+<h4>Mail</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="Code" type="hidden" />
+            <input asp-for="StartLocationId" type="hidden" value="@user.LocationAssignedId" />
+            <input asp-for="CreatedById" type="hidden" value="@userId" />
+            <div class="form-group">
+                <label class="control-label">Choose the destination for this package</label>
+                <select asp-for="EndLocationId" class="form-control" asp-items="@ViewBag.EndLocationsList"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> |
+                <a asp-action="Index" class="btn btn-primary">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

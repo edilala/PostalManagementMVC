@@ -1,0 +1,24 @@
+﻿@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Manage Items";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Manage Items</h1>
+
+<h4>Package</h4>
+<hr />
+<div class="row">
+    <partial name="~/Areas/Carrier/Views/Mail/Partial/_PackageItems.cshtml" model="@ViewBag.PackageItemsList" />
+</div>
+
+<div>
+    <a asp-action="Details" asp-route-id="@Model?.Id" class="btn btn-primary">Details</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary">Edit</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

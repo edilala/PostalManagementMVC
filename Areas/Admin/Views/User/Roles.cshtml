@@ -1,0 +1,49 @@
+﻿@using PostalManagementMVC.Areas.Admin.Models;
+@model UserRolesModel
+
+@{
+    ViewData["Title"] = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Roles</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Role Name
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.PossessedRoles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NormalizedName)
+                </td>
+                <td>
+                    <a asp-action="RemoveRole" asp-route-userId="@Model.User.Id" asp-route-roleId="@item.Id" class="btn btn-danger">Remove Role</a>
+                </td>
+            </tr>
+        }
+        @foreach (var item in Model.OtherRoles)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NormalizedName)
+                </td>
+                <td>
+                    <a asp-action="AddRole" asp-route-userId="@Model.User.Id" asp-route-roleId="@item.Id" class="btn btn-primary">Add Role</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.User.Id" class="btn btn-primary">Edit</a> |
+    <a asp-action="Details" asp-route-id="@Model?.User.Id" class="btn btn-primary">Details</a> |
+    <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>

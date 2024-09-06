@@ -1,0 +1,61 @@
+﻿@model IEnumerable<PostalManagementMVC.Entities.LocationConnection>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@* shfaqim listen e lidhjeve te vendoshjeve ne nje tabele dhe kemi butonat perkates per CRUD *@
+<h1>Locations Connections</h1>
+
+<p>
+    <a asp-action="Create" asp-route-fromLocationId="@ViewBag.FromLocationId" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FromLocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToLocationName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OnDay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TransportDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cost)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FromLocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ToLocationName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OnDay)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TransportDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

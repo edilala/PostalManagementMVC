@@ -1,0 +1,76 @@
+﻿@model PostalManagementMVC.Entities.Mail
+
+@{
+    ViewData["Title"] = "Cancel";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Cancel</h1>
+
+<h3>Are you sure you want to cancel this mail?</h3>
+<div>
+    <h4>Mail</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.MailBundleId)
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.MailBundleCode
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.Code)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Code)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.StartLocationId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartLocationId)
+        </dd>
+        <dt class="col-sm-10">
+            @Html.DisplayNameFor(model => model.EndLocationId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EndLocationId)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @ViewBag.CategoryName
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.RecipientAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.RecipientAddress)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.SenderAddress)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SenderAddress)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.TimeInserted)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeInserted)
+        </dd>
+        <dt class = "col-sm-10">
+            @Html.DisplayNameFor(model => model.TimeDelivered)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TimeDelivered)
+        </dd>
+    </dl>
+    
+    <form asp-action="Cancel">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Cancel" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-primary">Back to List</a>
+    </form>
+</div>

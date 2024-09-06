@@ -1,0 +1,29 @@
+﻿@using PostalManagementMVC.Areas.Admin.Models;
+@model ReportControls;
+@* razor page view per te zgjedhur nje periudhe te caktuar dhe shfaqur te dhena ose raporte sipas vendodhjes *@
+<h4>Counters statistics</h4>
+<div id="chart-page">
+    <div class="chart-controls">
+        @*<form asp-action="GetCounterChartData">*@
+        <div class="form-group">
+            <label asp-for="FromDate" class="control-label"></label>
+            <input asp-for="FromDate" id="FromDate" class="form-control" />
+            <span asp-validation-for="FromDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ToDate" class="control-label"></label>
+            <input asp-for="ToDate" id="ToDate" class="form-control" />
+            <span asp-validation-for="ToDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button type="button" id="refresh-chart-btn" class="btn btn-primary">Refresh Chart</button>
+        </div>
+    </div>
+    <div id="chart-wrapper">
+        <canvas id="counter-barchart"></canvas>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/Admin/ReportsByLocation.js" asp-append-version="true"></script>
+}

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PostalManagementMVC.Entities.City>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@* shfaqim listen e qyteteve ne nje tabele dhe kemi butonat perkates per CRUD *@
+
+<h1>@ViewBag.PageTitle</h1>
+
+<p>
+    <a asp-action="Create" asp-route-countryId="@ViewBag.CountryId" class="btn btn-primary">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitude)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-primary">Delete</a> |
+                    <a asp-controller="PostOffice" asp-action="Index" asp-route-cityId="@item.Id" class="btn btn-primary">Manage Post Offices</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
